@@ -1,6 +1,9 @@
-# prueba_onestic
 - [Qué vamos a valorar](#qué-vamos-a-valorar)
 - [Introducción](#introducción)
+  - [Casos de uso a cubrir](#casos-de-uso-a-cubrir)
+    - [Reporte 1](#reporte-1)
+    - [Reporte 2](#reporte-2)
+    - [Reporte 3](#reporte-3)
 - [Requisitos mínimos de la prueba](#requisitos-mínimos-de-la-prueba)
 - [Para nota](#para-nota)
 - [¿Cómo entregar la prueba?](#cómo-entregar-la-prueba)
@@ -11,56 +14,79 @@ Desde nuestro punto de vista no existen pruebas bien hechas o pruebas mal hechas
 
 Vamos a valorar que la solución planteada esté bien documentada y que seamos capaces de ejecutar tu solución “sin pensar”.
 
-Vamos a valorar **mucho** como has llegado a la solución que nos propones, documenta el proceso que has seguido y las urls de las páginas o libros que has utilizado para documentarte.
+Vamos a valorar **mucho** cómo has llegado a la solución que nos propones. Documenta el proceso que has seguido y las urls de las páginas o libros que has utilizado.
 
-No establecemos qué lenguaje, herramienta o framework tienes que utilizar, elige el camino que prefieras y dinos por qué lo has elegido.
+No establecemos qué lenguaje, herramienta o framework tienes que utilizar, elige el camino que prefieras y dinos por qué lo has elegido. En nuestro día a día, los lenguajes que usamos son Python, PHP y JS, para nosotros es más sencillo validar tu prueba en alguno de estos lenguajes.
 
-Si por tus conocimientos no eres capaz de realizar el 100% de la prueba, ¡no te frustres! Llega hasta el punto que seas capaz. Explica las decisiones que has tomado y los problemas que te has encontrado
+Si por tus conocimientos no eres capaz de realizar el 100% de la prueba, ¡no te frustres! Llega hasta el punto que seas capaz. Explica las decisiones que has tomado y los problemas que te has encontrado.
 
 # Introducción
 
-El profesor Serbal nos has pedido una aplicación web en la que poder consultar todos los Pokemon que habitan en la región de Sinnoh.
+Trabajamos como backend developer en la empresa Papas ACME, S.A. El departamento financiero aún tiene la necesidad de a partir de la información que tiene de clientes, productos e informes poder generar una serie de reportes. Por desgracia, el departamento no está excesivamente digitalizado y continúan trabajando con XLS, tras negociar con ellos hemos conseguido que exporten sus datos a ficheros CSV.
 
-Los Pokemon tienen una gran cantidad de información y, aunque el profesor nos ha comentado que lo más importante para él es la imagen y el nombre de los Pokemon, cuanta más información podamos representar que sea interesante, siempre será mejor. Eso sí, le gustaría poder representar toda esta información tanto en formato cuadrícula como en formato lista.
+Esta es la estructura que hemos definido conjuntamente para cada una de las entidades.
 
-Además, como en la vista lista no podemos representar toda la información cuando hagamos clic sobre ellos también es necesario poder consultar más datos acerca de cada Pokemon, como sus puntos de experiencia, su tipo, ataque, defensa y ataque especial.
+| Fichero | customers.csv | products.csv | orders.csv |
+|---------|---------------|--------------|------------|
+| Que contiene | Información de clientes |Información de productos |Información de pedidos| 
+| Columnas del fichero: |-`id` ID numérico que identifica al cliente <br>- `firstname` Nombre<br>-`lastname` Apellidos |-`id` ID numérico que identifica el producto<br>-`name` Nombre del producto<br>-`cost` Precio del producto en euros|-`id` ID numérico que identifica el pedido<br>-`customer` ID del cliente que hizo el pedido<br>-`products` Listado de ID’s de productos que ha comprado un cliente en el pedido.
+|Fichero|[customers.csv](customers.csv)|[products.csv](products.csv)|[orders.csv](orders.csv)|
+ 
+## Casos de uso a cubrir
 
-Al profesor Serbal le encantaría, además, poder tener un modo oscuro de la aplicación para cuando la consulta por las noches.
+Nuestros compañeros del departamento, nos presentan tres casos de uso que generarán distintos reportes de información a partir de unos ficheros que se suben a la plataforma.
 
-Para terminar, el profesor Serbal también ha dejado caer que para él, aunque no sea imprescindible, sería fantástico poder marcar sus Pokemon favoritos y consultarlos en otra pantalla de la aplicación.
+### Reporte 1
+
+El equipo de ventas quiere saber el total de cada pedido. Debe generar un fichero llamado “order_prices.csv” con las siguientes columnas: 
+
+id: ID del pedido
+
+total: Total del pedido en euros
+
+### Reporte 2
+
+El equipo de marketing quiere saber que clientes han comprado cada producto. Debe generar un fichero llamado “product_customers.csv” con las siguientes columnas: 
+
+id: ID del producto
+
+customer_ids: Lista de todos los ID’s que han comprado ese producto (Separados por un espacio)
+
+### Reporte 3
+
+ Para evaluar a los clientes, necesitamos un fichero que contenga todos los pedidos ordenados descendentemente por el total en euros:
+
+Debe generar un fichero llamado “customer_ranking.csv" con las siguientes columnas: 
+
+id: ID del cliente
+
+name: Nombre del cliente
+
+lastname: Apellidos del cliente
+
+total: Total en euros que el cliente ha comprado en productos.
+
+Las columnas deben ir correctamente identificadas con el nombre de cada columna en la primera fila de los ficheros.
 
 # Requisitos mínimos de la prueba
 
-Se desarrollará una aplicación web en JavaScript utilizando la API pública [PokéAPI](https://pokeapi.co/) para la obtención de los datos. Los requisitos a cumplir son:
+* Desarrolla una aplicación que utilizando como parámetros de entrada los tres ficheros suministrados customers.csv, products.csv y orders.csv genere los tres reportes solicitados.
 
+* No es necesario que construyas un frontend, es una prueba de backend. Es suficiente con tener un comando en consola que recoja la entrada y genere los archivos de salida.
 
-* Tienes que gestionar una aplicación con dos vistas:
-  * Una vista listado con la información resumida de los Pokemons.
-  * Una vista detalle con la información detallada del Pokemons seleccionado.
-* ¡Cuidado! en la región de Sinnoh hay innumerables Pokemon, por lo que se recomienda paginar los resultados.
-* Ordenar la información y estructurar la aplicación. Lo fácil sería que te pasáramos un mockup o diseño, pero queremos que pienses cual es la mejor forma de estructurar, agrupar y mostrar la información.
-* Añadir una acción para poder cambiar entre modo oscuro o modo claro la aplicación.
-* En el listado de Pokemons, habilitar una opción para poder cambiar la visualización de modo cuadrícula a modo lista.
-
-> La imágenes de los Pokemon se podrán obtener a partir de la siguiente url: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{POKEMOM_ID}.png`)
-
-> El listado de Pokemon se puede obtener con la siguiente llamada `https://pokeapi.co/api/v2/pokemon`, consulta la documentación del [API Documentation - PokéAPI](https://pokeapi.co/docs/v2).
-
-
-
+* Decíamos en el primer apartado de la prueba que vamos a valorar como documentes la prueba, puedes crear un fichero readme.md con los pasos que tenemos que dar para ejecutar tu prueba en local.
 
 # Para nota
 
-Además de los requisitos mínimos para la prueba, hemos definido una serie de bolas extras para que puedas lucirte:
+Además de los requisitos mínimos para la prueba, hemos definido una serie de requisitos adicionales para que puedas lucirte
 
 * **Testing.** No es imprescindible, pero si vienes con nosotros vas a tener que aprender a testear tu código, puede ser un buen momento para empezar.
-* **Variables CSS.** CSS no es un lenguaje de programación pero existen técnicas que hacen el código CSS más mantenible.
-* **Typescript.** Javascript no es un lenguaje tipado, Typescript ha venido para quedarse.
-* **Responsive Design.** ¿Mobile, desktop o tablet? O mejor si funciona tu  aplicación en todos ellos.
-* **Favoritos**
-  * Poder marcar los Pokemon como favoritos.
-  * Desarrollar una página que muestre nuestros Pokemons favoritos.
-  * Mantener el estado de los Pokemon guardados como favoritos aunque se recargue la página.
+
+* **API.** Implementar la aplicación como un API que permita subir los ficheros, generar los resultados y descargarlos.
+
+* **Docker.** Nos gustaría que toda la prueba y sus dependencias se ejecutaran dentro de un contenedor y así nuestros compañeros de departamento solo necesitarán Docker en su día a día.
+
+* **Frontend.** Cómo decíamos no es un requisito, pero si te animas seguro que para nuestros compañeros es más sencillo utilizar la aplicación a través de un formulario web.
 
 # ¿Cómo entregar la prueba?
 
