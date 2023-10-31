@@ -1,8 +1,10 @@
 from django.db import models
 
 class Order(models.Model):
-    id_order = models.AutoField(primary_key=True)
-    total = models.DecimalField(max_digits=10, decimal_places=2)
+    id = models.IntegerField(primary_key=True)
+    customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
+    products = models.ManyToManyField('Product')
 
     def __str__(self):
-        return f"Order ID: {self.id_order}, Total: {self.total} euros"
+        return f"ID: {self.id}, id customer: {self.customer.id}, products: {self.product}"
+
