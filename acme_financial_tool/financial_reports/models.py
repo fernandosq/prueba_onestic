@@ -6,5 +6,6 @@ class Order(models.Model):
     products = models.ManyToManyField('Product')
 
     def __str__(self):
-        return f"ID: {self.id}, id customer: {self.customer.id}, products: {self.product}"
+        return f"ID: {self.id}, customer: {self.customer}, products: {self.products}"
+
 
