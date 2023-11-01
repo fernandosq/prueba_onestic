@@ -1,3 +1,4 @@
+from decimal import Decimal
 from django.test import TestCase
 from .data_processing import deserialize_customer_csv, deserialize_products_csv, deserialize_orders_csv
 from .models import Customer, Product, OrderCount, Order
@@ -32,6 +33,7 @@ class DataProcessingTest(TestCase):
 
     def test_orders_summary(self):
         summary = generate_orders_summary()
-        self.assertEqual(len(summary),50)
+        self.assertEqual(len(summary), 50)
+        self.assertEqual(summary[0], Decimal("18.94"))
 
 
