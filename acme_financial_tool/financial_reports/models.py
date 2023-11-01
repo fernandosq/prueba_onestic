@@ -4,7 +4,7 @@ from django.db import models
 class Order(models.Model):
     id = models.IntegerField(primary_key=True)
     customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
-    products = models.ManyToManyField('Product')
+    products = models.ManyToManyField('Product', through="OrderCount")
 
     def __str__(self):
         return f"ID: {self.id}, customer: {self.customer}, products: {self.products}"
@@ -26,3 +26,20 @@ class Product(models.Model):
 
     def __str__(self):
         return f"Product ID: {self.id} - Name: {self.name} Cost: {self.cost}"
+
+
+class OrderCount(models.Model):
+    order = models.ForeignKey('Order', to_field='id', on_delete=models.CASCADE)
+    product = models.ForeignKey('Product', to_field='id', on_delete=models.CASCADE)
+    count = models.IntegerField(default=0)
+    def __str__(self):
+        return f" Customer ID: {self.customer_id.id}"
+
+    @classmethod
+    def add_product(cls, order_id, product_id):
+        from django.db.models import F
+        return cls.objects.update_or_create(order_id=order_id,
+                                     product_id=product_id,
+                                     defaults={"count": F("count") + 1},
+                                     create_defaults={"count": 0})
+
