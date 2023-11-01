@@ -1,7 +1,7 @@
 from decimal import Decimal
 from django.test import TestCase
 from .data_processing import deserialize_customer_csv, deserialize_products_csv, deserialize_orders_csv
-from .models import Customer, Product, OrderCount, Order
+from .models import Customer, Product, OrderCount
 from .generator_reports import generate_orders_summary, generate_product_summary, generate_ranking_customer_summary
 
 
