@@ -33,7 +33,7 @@ class OrderCount(models.Model):
     product = models.ForeignKey('Product', to_field='id', on_delete=models.CASCADE)
     count = models.IntegerField(default=0)
     def __str__(self):
-        return f" Customer ID: {self.customer_id.id}"
+        return f" Order ID: {self.order.id}, product: {self.product.name}, count: {self.count}"
 
     @classmethod
     def add_product(cls, order_id, product_id):
@@ -41,5 +41,5 @@ class OrderCount(models.Model):
         return cls.objects.update_or_create(order_id=order_id,
                                      product_id=product_id,
                                      defaults={"count": F("count") + 1},
-                                     create_defaults={"count": 0})
+                                     create_defaults={"count": 1})
 
