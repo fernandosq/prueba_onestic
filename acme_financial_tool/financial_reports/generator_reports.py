@@ -18,3 +18,13 @@ def generate_product_summary():
         summary[order.product.id].add(order.order.customer.id)
     return {k: ",".join(str(x) for x in v) for k, v in summary.items()}
 
+
+def generate_ranking_customer_summary():
+    order_query = OrderCount.objects.all()
+    summary = defaultdict(Decimal)
+    for order in order_query:
+        summary[order.order.customer] += order.count * order.product.cost
+    return summary
+
+
+
