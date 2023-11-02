@@ -45,7 +45,6 @@ def api_download_files(request):
         buffer2.seek(0)
         buffer3.seek(0)
 
-        # Crear una respuesta HTTP y establecer el tipo de contenido y las cabeceras
         response = HttpResponse(zip_buffer.getvalue(), content_type='application/zip')
         response['Content-Disposition'] = 'attachment; filename=archivos_csv.zip'
 
