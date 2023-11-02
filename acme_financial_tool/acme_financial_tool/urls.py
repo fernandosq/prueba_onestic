@@ -21,5 +21,6 @@ from financial_reports import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('upload_files/', views.api_upload_files, name="upload_files"),
+    path('download_files/', views.api_download_files, name="download_files"),
 
 ]
