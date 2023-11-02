@@ -16,7 +16,7 @@ def generate_product_summary():
     summary = defaultdict(set)
     for order in order_query:
         summary[order.product.id].add(order.order.customer.id)
-    return {k: ",".join(str(x) for x in v) for k, v in summary.items()}
+    return {k: " ".join(str(x) for x in v) for k, v in summary.items()}
 
 
 def generate_ranking_customer_summary():
@@ -24,6 +24,7 @@ def generate_ranking_customer_summary():
     summary = defaultdict(Decimal)
     for order in order_query:
         summary[order.order.customer] += order.count * order.product.cost
+    summary = dict(sorted(summary.items(), key=lambda item: item[1], reverse=True))
     return summary
 
 
