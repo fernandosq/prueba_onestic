@@ -66,4 +66,3 @@ Aunque estoy contento con el resultado hay cosas que se han quedado sueltas y se
 * Validación y verificación de los csv´s
 * Reporte de errores
 * Testing de los endpoints
-
