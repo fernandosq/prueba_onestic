@@ -1,0 +1,10 @@
+customers.csv
+orders.csv
+products.csv
+.cache
+.idea
+.pydevproject
+.git/
+__pycache__
+venv
+Dockerfile

@@ -16,5 +16,6 @@ COPY . .
 # Exponer el puerto en el que se ejecutará la aplicación
 EXPOSE 8000
 
+
 # Comando para ejecutar la aplicación Django
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "./acme_financial_tool/manage.py", "runserver", "0.0.0.0:8000"]
