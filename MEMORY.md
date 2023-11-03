@@ -52,4 +52,18 @@ Para esta parte de docker utilice documentación oficial de docker, ya que habí
 De esta forma tenemos la aplicación operativa para poder hacer peticiones a los diferentes endpoints creados:
 
 * upload/files/
+Este endpoint es un **POST**, en el body tienen que enviarse los 3 archivos, siendo de clave el nombre orders.csv, customers.csv, products.csv y valor el archivo csv.
+![Alt text](image.png)
+
 * download/reports/
+Este endpoint es un **GET**, que devuelve un zip que contiene los 3 csv`s requeridos en la prueba.
+
+# Conclusiones
+
+He desarrollado este proyecto de forma que se pueda ver mis habilidades y experiencia.
+Aunque estoy contento con el resultado hay cosas que se han quedado sueltas y se podrían mejorar:
+* Validación de parametros
+* Validación y verificación de los csv´s
+* Reporte de errores
+* Testing de los endpoints
+
